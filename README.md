@@ -1,2 +1,2 @@
-# edu-journey
-Education Journey
+# Education Journey
+Details to Follow
