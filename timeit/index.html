@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time It</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      --background: #101827;
+      --panel: rgba(255,255,255,.09);
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      overflow: hidden; background: var(--background); color: #f8fafc;
+      font: 500 16px/1.35 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      transition: background .35s ease;
+    }
+    main { width: min(92vw, 760px); text-align: center; }
+    h1 { margin: 0 0 8px; font-size: clamp(1rem, 2.3vw, 1.25rem); letter-spacing: .18em; text-transform: uppercase; opacity: .74; }
+    #display { margin: 0; font-size: clamp(6rem, 23vw, 13rem); font-variant-numeric: tabular-nums; font-weight: 750; letter-spacing: -.075em; line-height: 1; text-shadow: 0 5px 24px rgba(0,0,0,.18); }
+    #status { min-height: 1.5em; margin: 16px 0 28px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    button, input { border: 0; border-radius: 12px; font: inherit; color: inherit; }
+    button { min-width: 106px; padding: 13px 18px; cursor: pointer; background: var(--panel); font-weight: 700; transition: transform .12s, background .2s; }
+    button:hover { background: rgba(255,255,255,.18); }
+    button:active { transform: scale(.96); }
+    button.primary { background: #22c55e; color: #062d15; }
+    button.primary:hover { background: #4ade80; }
+    .set-time { display: flex; align-items: center; gap: 8px; margin: 26px auto 0; width: max-content; padding: 10px 12px 10px 16px; border-radius: 14px; background: var(--panel); }
+    input { width: 5.5ch; padding: 5px 3px; background: transparent; text-align: center; font-size: 1.1rem; font-weight: 700; outline: 1px solid rgba(255,255,255,.25); }
+    label { font-size: .9rem; opacity: .8; }
+    body.warning { --background: #c62626; }
+    body.flashing { animation: flash .72s steps(1, end) infinite; }
+    body.done { --background: #591818; }
+    @keyframes flash { 50% { background: #fff3b0; color: #4a1010; } }
+    @media (prefers-reduced-motion: reduce) { body.flashing { animation: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Time It</h1>
+    <p id="display" aria-live="polite">05:00</p>
+    <p id="status">Ready</p>
+    <div class="controls">
+      <button class="primary" id="start" type="button">Start</button>
+      <button id="pause" type="button" disabled>Pause</button>
+      <button id="reset" type="button">Reset</button>
+    </div>
+    <div class="set-time">
+      <label for="minutes">Duration</label>
+      <input id="minutes" type="number" min="1" max="999" value="5" inputmode="numeric" aria-label="Timer duration in minutes">
+      <span>minutes</span>
+    </div>
+  </main>
+  <script>
+    const display = document.querySelector('#display');
+    const status = document.querySelector('#status');
+    const startButton = document.querySelector('#start');
+    const pauseButton = document.querySelector('#pause');
+    const resetButton = document.querySelector('#reset');
+    const minutesInput = document.querySelector('#minutes');
+    let duration = 5 * 60;
+    let remaining = duration;
+    let deadline = null;
+    let timerId = null;
+
+    function format(seconds) {
+      const mins = Math.floor(seconds / 60);
+      return `${String(mins).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+    }
+
+    function paint() {
+      display.textContent = format(remaining);
+      document.body.classList.toggle('warning', remaining > 30 && remaining <= 60);
+      document.body.classList.toggle('flashing', remaining > 0 && remaining <= 30);
+      document.body.classList.toggle('done', remaining === 0);
+      if (remaining === 0) status.textContent = 'Time is up';
+      else if (remaining <= 30 && deadline) status.textContent = '30-second warning';
+      else if (remaining <= 60 && deadline) status.textContent = '1 minute left';
+      else if (deadline) status.textContent = 'Running';
+      else status.textContent = 'Ready';
+    }
+
+    function stop() {
+      clearInterval(timerId);
+      timerId = null;
+      deadline = null;
+      startButton.disabled = false;
+      pauseButton.disabled = true;
+      startButton.textContent = remaining === duration ? 'Start' : 'Resume';
+    }
+
+    function tick() {
+      remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      paint();
+      if (remaining === 0) stop();
+    }
+
+    function start() {
+      if (remaining === 0) return reset();
+      deadline = Date.now() + remaining * 1000;
+      timerId = setInterval(tick, 200);
+      startButton.disabled = true;
+      pauseButton.disabled = false;
+      minutesInput.disabled = true;
+      tick();
+    }
+
+    function reset() {
+      stop();
+      duration = Math.max(1, Math.min(999, Number(minutesInput.value) || 5)) * 60;
+      minutesInput.value = duration / 60;
+      remaining = duration;
+      minutesInput.disabled = false;
+      paint();
+    }
+
+    startButton.addEventListener('click', start);
+    pauseButton.addEventListener('click', () => { stop(); paint(); });
+    resetButton.addEventListener('click', reset);
+    minutesInput.addEventListener('change', reset);
+    paint();
+  </script>
+</body>
+</html>
