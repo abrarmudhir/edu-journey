@@ -59,7 +59,7 @@
       <p><a href="https://masjidabubakr.co.uk/" target="_blank" rel="noopener noreferrer">Masjid Abu Bakr, Walthamstow</a></p>
       <p id="prayer-date"></p>
       <div class="next-salah" id="next-salah">
-        <div class="next-heading"><span>Next salah</span><select id="salah-mode" aria-label="Count down to prayer start or congregation"><option value="begins">Begins</option><option value="iqamah">Iqamah</option></select></div>
+        <div class="next-heading"><span>Next salah</span><select id="salah-mode" aria-label="Count down to prayer start or congregation"><option value="begins">Begins</option><option value="iqamah" selected>Iqamah</option></select></div>
         <p class="next-name" id="next-name" aria-live="polite">Finding next salah…</p>
         <output class="countdown" id="salah-countdown" role="timer" aria-live="off" aria-label="Time until next salah">--:--:--</output>
         <p class="next-detail" id="next-detail">Using London local time</p>
@@ -123,10 +123,10 @@
     }
     function updateSalahCountdown(){
       const now=Date.now(),today=londonDate.format(new Date(now)),next=findNextSalah(prayerDays.filter(day=>day.d_date>=today),now,salahMode.value);
-      const begins=findNextSalah(prayerDays,now,'begins'),alerting=Boolean(begins&&begins.at-now<=15*60*1000),alertLabel=document.querySelector('#salah-alert-label');
+      const alerting=Boolean(next&&next.at-now<=15*60*1000),alertLabel=document.querySelector('#salah-alert-label');
       document.querySelector('.prayers').classList.toggle('salah-alert',alerting);
       alertLabel.hidden=!alerting;
-      alertLabel.textContent=alerting?`${begins.name} begins in ${Math.ceil((begins.at-now)/60000)} min`:'';
+      alertLabel.textContent=alerting?`${next.name} ${salahMode.value==='iqamah'?'iqamah':'begins'} in ${Math.ceil((next.at-now)/60000)} min`:'';
       for(const row of prayerRows.children)row.classList.toggle('up-next',Boolean(next&&next.date===prayerDay&&row.dataset.prayer===next.name));
       nextSalah.classList.remove('soon');
       if(!next){nextName.textContent=prayerLoading?'Finding next salah…':'Awaiting timetable';salahCountdown.textContent='--:--:--';nextDetail.textContent='A current timetable is needed for the countdown.';salahProgress.style.width='0%';return}
