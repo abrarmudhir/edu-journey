@@ -8,20 +8,158 @@
   <style>
     :root{color-scheme:dark}*{box-sizing:border-box}body{--bg:#10182b;--accent:#7dd3fc;--panel:rgba(255,255,255,.1);margin:0;min-height:100vh;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 26%,#243b6f 0,var(--bg) 58%);color:#f8fafc;font:500 16px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;transition:background .45s ease}body:before,body:after{content:"";position:fixed;width:42vmax;height:42vmax;border-radius:50%;filter:blur(80px);opacity:.16;pointer-events:none}body:before{background:#38bdf8;left:-22vmax;top:-24vmax}body:after{background:#8b5cf6;right:-24vmax;bottom:-28vmax}main{width:min(92vw,680px);text-align:center;position:relative;z-index:1}h1{margin:0 0 10px;font-size:.85rem;letter-spacing:.28em;text-transform:uppercase;opacity:.78}.now{display:inline-flex;align-items:baseline;gap:9px;margin:0 0 18px;padding:7px 13px;border:1px solid rgba(251,191,36,.35);border-radius:999px;background:rgba(251,191,36,.1);color:#fcd34d;box-shadow:0 8px 24px rgba(0,0,0,.12)}.now span{font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.85}.now time{font-size:1.05rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.04em}.timer{position:relative;width:min(72vw,390px);aspect-ratio:1;margin:auto;display:grid;place-items:center}svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);filter:drop-shadow(0 14px 20px rgba(0,0,0,.24))}.track{fill:none;stroke:rgba(255,255,255,.12);stroke-width:9}.progress{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .3s linear,stroke .4s ease}.clock{width:74%;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.035));box-shadow:inset 0 1px rgba(255,255,255,.18),0 24px 45px rgba(0,0,0,.2);backdrop-filter:blur(8px)}#display{margin:0;font-size:clamp(4.1rem,16vw,7.9rem);font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:-.075em;line-height:1;text-shadow:0 5px 24px rgba(0,0,0,.18)}#status{min-height:1.5em;margin:19px 0 27px;color:#dbeafe;font-size:.78rem;font-weight:750;letter-spacing:.15em;text-transform:uppercase}.controls{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}button,input{border:0;border-radius:12px;font:inherit;color:inherit}button{min-width:100px;padding:12px 17px;cursor:pointer;background:var(--panel);font-weight:750;box-shadow:inset 0 1px rgba(255,255,255,.12);transition:transform .12s,background .2s}button:hover:not(:disabled){background:rgba(255,255,255,.18)}button:active:not(:disabled){transform:scale(.96)}button:disabled{opacity:.42;cursor:not-allowed}button.primary{background:var(--accent);color:#082031;box-shadow:none}button.primary:hover:not(:disabled){background:#bae6fd}.settings{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 14px;margin:25px auto 0}.set-time,.sound-toggle{display:flex;align-items:center;gap:8px;padding:9px 12px 9px 15px;border-radius:13px;background:var(--panel)}input{width:4.5ch;padding:4px 2px;background:transparent;text-align:center;font-size:1.05rem;font-weight:750;outline:1px solid rgba(255,255,255,.25)}label{font-size:.85rem;opacity:.84}.sound-toggle{padding:0}.sound-toggle button{min-width:0;padding:9px 13px;font-size:.85rem}body.warning{--bg:#a91f2a;--accent:#fecaca}body.flashing{animation:flash .72s steps(1,end) infinite}body.done{--bg:#44161d;--accent:#fda4af}body.done .clock{animation:done-pulse 1.2s ease-in-out infinite}@keyframes flash{50%{background:#fff0bb;color:#4b1017}}@keyframes done-pulse{50%{transform:scale(1.025)}}@media (prefers-reduced-motion:reduce){body.flashing,body.done .clock{animation:none}}
     .info{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 18px}.info .now{margin:0}.temperature{display:inline-flex;align-items:baseline;gap:9px;padding:7px 13px;border:1px solid rgba(125,211,252,.35);border-radius:999px;background:rgba(125,211,252,.1);color:#bae6fd;box-shadow:0 8px 24px rgba(0,0,0,.12)}.temperature span{font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.85}.temperature output{font-size:1.05rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.04em}:fullscreen{background:var(--bg)}:fullscreen main{width:min(92vw,860px)}:fullscreen .timer{width:min(72vw,62vh,560px)}
+    body{overflow:auto;padding:32px 0}main{width:min(94vw,1060px);display:grid;grid-template-columns:minmax(0,680px) 320px;gap:36px;align-items:center}.prayers{text-align:left;padding:24px;border:1px solid rgba(125,211,252,.2);border-radius:24px;background:rgba(15,23,42,.65);box-shadow:0 24px 45px rgba(0,0,0,.15);color:#f8fafc}.prayers h2{font-size:1.2rem;margin:0 0 6px}.prayers p{margin:0 0 16px;color:#cbd5e1;font-size:.82rem}.prayers a{color:#7dd3fc;text-underline-offset:3px}.prayers table{width:100%;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}.prayers th,.prayers td{padding:12px 5px;border-bottom:1px solid rgba(255,255,255,.08);text-align:right}.prayers th:first-child{text-align:left}.prayers thead th{font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em}.prayers tbody th{font-weight:600}.prayers .prayer-note{margin:16px 0 0;font-size:.75rem}.prayers button{margin-top:12px;min-width:0;padding:8px 12px;font-size:.8rem}.prayers [hidden]{display:none}:fullscreen main{width:min(94vw,1200px);grid-template-columns:minmax(0,1fr) 320px}@media(max-width:800px){main,:fullscreen main{width:min(92vw,680px);grid-template-columns:1fr;gap:28px}.prayers{width:min(100%,390px);justify-self:center}body{padding:24px 0}}
+    body{--bg:#080e20;--accent:#83e8d1;--panel:rgba(150,180,230,.09);background:radial-gradient(ellipse at 18% 15%,#183b4d 0,transparent 48%),radial-gradient(ellipse at 86% 80%,#302350 0,transparent 50%),var(--bg)}body:before,body:after{width:55vmax;height:55vmax;opacity:.22;animation:aurora 22s ease-in-out infinite alternate}body:before{background:#2dd4bf;left:-25vmax;top:-20vmax}body:after{background:#a78bfa;right:-25vmax;bottom:-25vmax;animation-delay:-11s}main{width:min(94vw,1160px);grid-template-columns:minmax(0,1fr) 360px;gap:24px}main>section,.prayers{border:1px solid rgba(185,213,255,.15);background:linear-gradient(145deg,rgba(32,49,74,.8),rgba(10,18,36,.88));box-shadow:inset 0 1px rgba(255,255,255,.07),0 30px 90px #0004;backdrop-filter:blur(24px);border-radius:30px}main>section{padding:32px 20px}h1{color:#a7f3d0;opacity:1;letter-spacing:.35em;margin-bottom:9px}.tagline{margin:0 0 24px;color:#94a3b8;font-size:.88rem}.timer{width:min(68vw,350px)}.track{stroke:rgba(148,163,184,.1);stroke-width:3}.progress{stroke-width:3;filter:drop-shadow(0 0 2px var(--accent))}.timer:before{content:"";position:absolute;inset:8%;border:1px dashed #a5e8df26;border-radius:50%;animation:orbit 100s linear infinite}.clock{background:radial-gradient(circle at 35% 20%,#3d647c66,#101b30 80%);box-shadow:inset 0 1px #c8edff30,inset 0 -15px 40px #0003,0 0 70px #5eead410}.clock:before{content:"FOCUS SESSION";font-size:.58rem;letter-spacing:.22em;color:#9bbdc9;margin-bottom:15px}#display{font-size:clamp(3.4rem,13vw,6.3rem);letter-spacing:-.065em}#status{margin:15px 0 23px;color:#a5dace}button{border:1px solid #b5cfff13;transition:transform .18s,background .2s,box-shadow .2s}button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px #0003}button.primary{background:linear-gradient(120deg,#a7f3d0,#67d7e7);box-shadow:0 6px 28px #5eead425}.controls{gap:8px}.controls button{min-width:85px;padding:11px 14px;font-size:.88rem}.prayers{padding:24px}.prayers h2{font-size:1.22rem;letter-spacing:-.03em}.prayers a{color:#a5ddd3}.prayers th,.prayers td{padding:10px 5px}.prayers tbody tr{transition:background .3s,color .3s}.prayers tbody tr.up-next{background:#5eead412;color:#a7f3d0}.prayers tbody tr.up-next th{box-shadow:inset 2px 0 #5eead4;padding-left:9px}.next-salah{position:relative;overflow:hidden;margin:20px 0;padding:20px;border:1px solid #5eead440;border-radius:20px;background:radial-gradient(ellipse at top right,#5eead425,transparent 75%),#0b202bb3}.next-salah:after{content:"";position:absolute;width:90px;height:90px;border:1px solid #a7f3d015;border-radius:50%;right:-20px;top:-25px;box-shadow:0 0 0 14px #a7f3d007,0 0 0 28px #a7f3d007;pointer-events:none}.next-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}.next-heading span{color:#99dbce;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase}.next-heading select{max-width:130px;background:#112d39;color:#d1fae5;border:1px solid #9be6da30;border-radius:8px;padding:5px;font:inherit;font-size:.73rem}.prayers .next-name{font-size:1.15rem;color:#e0fff6;margin:16px 0 6px;font-weight:700}.countdown{display:block;font-size:clamp(2rem,6vw,2.7rem);font-weight:650;letter-spacing:.025em;font-variant-numeric:tabular-nums;line-height:1.15;color:#f0fdfa}.prayers .next-detail{margin:9px 0 0;color:#94bdb9;font-size:.74rem}.countdown-track{height:3px;background:#a7f3d018;border-radius:4px;margin-top:16px;overflow:hidden}.countdown-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2dd4bf,#bef264);transition:width 1s linear}.next-salah.soon{border-color:#fbbf2470;background:radial-gradient(ellipse at top right,#fbbf2420,transparent 75%),#20251e}.next-salah.soon .countdown{color:#fde68a}button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #a7f3d0;outline-offset:4px}body.warning,body.flashing{--accent:#fda4af}body.warning main>section,body.flashing main>section{border-color:#fb718580;background:linear-gradient(145deg,#552837,#1e152b)}body.flashing{animation:none}body.flashing .clock{animation:done-pulse 1.2s ease-in-out infinite}body.done main>section{border-color:#fda4af66}@keyframes aurora{to{transform:translate(12vw,8vh) scale(1.18)}}@keyframes orbit{to{transform:rotate(360deg)}}:fullscreen main{width:min(94vw,1260px);grid-template-columns:minmax(0,1fr) 360px}:fullscreen .timer{width:min(65vw,48vh,480px)}@media(max-width:800px){main,:fullscreen main{grid-template-columns:minmax(0,1fr);width:min(92vw,600px)}main>section{padding:26px 14px}.prayers{width:100%;max-width:none}.next-salah{padding:20px}.countdown{font-size:2.7rem}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+    main,:fullscreen main{width:min(96vw,1480px);grid-template-columns:300px minmax(0,1fr) 340px;gap:20px}main>section{min-width:0}.timer,:fullscreen .timer{max-width:100%}.dua-panel{position:relative;min-width:0;text-align:left;padding:26px 24px;border:1px solid #d8b4fe30;border-radius:30px;background:radial-gradient(ellipse at top left,#a78bfa1c,transparent 65%),linear-gradient(145deg,#20243be6,#0c1427ed);box-shadow:inset 0 1px #ffffff12,0 30px 90px #0004;backdrop-filter:blur(24px)}.dua-panel .dua-eyebrow{margin:0 0 10px;color:#d8b4fe;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}.dua-panel h2{margin:0;font-size:1.22rem;letter-spacing:-.03em}.dua-panel .dua-date{margin:7px 0 24px;font-size:.76rem;color:#a5aec4}.dua-panel h3{font-size:1rem;font-weight:600;color:#e9ddfa;margin:0 0 18px;line-height:1.5}.dua-arabic{margin:0 0 22px;padding:20px 14px;border:1px solid #d8b4fe20;border-radius:18px;background:#b39bff08;color:#faf5ff;font-family:"Traditional Arabic","Noto Naskh Arabic","Amiri",serif;font-size:1.85rem;font-weight:400;line-height:2.1;text-align:right;overflow-wrap:anywhere}.dua-label{margin:18px 0 7px;color:#b6a2d3;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}.dua-transliteration{font-size:.87rem;font-style:italic;line-height:1.8;color:#c8bddb;margin:0;overflow-wrap:anywhere}.dua-meaning{font-size:.94rem;line-height:1.8;color:#e2e8f0;margin:0}.dua-reference{display:inline-block;margin:20px 0 0;border:1px solid #d8b4fe25;border-radius:7px;padding:5px 9px;font-size:.72rem;color:#d8b4fe;background:#d8b4fe08}.dua-footer{border-top:1px solid #d8b4fe20;margin-top:22px;padding-top:18px}.dua-footer a{color:#d8b4fe;font-size:.82rem;text-underline-offset:4px}.dua-footer p{font-size:.72rem;color:#98a1b7;line-height:1.65;margin:10px 0 0}@media(max-width:1199px){main,:fullscreen main{width:min(94vw,940px);grid-template-columns:minmax(0,1fr) 340px}.dua-panel{grid-column:1/-1;grid-row:2}.dua-arabic{font-size:2rem}.dua-panel .dua-date{margin-bottom:18px}}@media(max-width:800px){main,:fullscreen main{width:min(92vw,600px);grid-template-columns:minmax(0,1fr)}.dua-panel{grid-column:auto;grid-row:auto}.dua-panel,.prayers{padding:24px 20px}}
+    .ayat-footer{grid-column:1/-1;min-width:0;padding:26px 32px;border:1px solid #f5d99830;border-radius:26px;background:radial-gradient(ellipse at top right,#d6ad5512,transparent 65%),linear-gradient(120deg,#192338ed,#101a2ded);box-shadow:inset 0 1px #ffffff0d,0 20px 60px #0003;text-align:center}.ayat-header{display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left}.ayat-header h2{margin:0;color:#f4dba2;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}.ayat-header button{min-width:0;padding:9px 14px;font-size:.8rem;color:#f4dba2;border-color:#f5d99825;background:#f5d9980a}.ayat-footer blockquote{margin:20px auto;max-width:1000px}.ayat-arabic{font-family:"Traditional Arabic","Noto Naskh Arabic","Amiri",serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:400;line-height:2;overflow-wrap:anywhere;margin:0 0 12px;color:#fff8e8}.ayat-translation{max-width:760px;margin:0 auto;color:#d8dfe9;font-size:1rem;line-height:1.8}.ayat-footer cite{display:block;font-style:normal;font-size:.8rem;color:#e8cc92;margin-top:15px}.ayat-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;font-size:.76rem;color:#9fa9bc}.ayat-links a{color:#d9c393;text-underline-offset:4px}.ayat-footer .ayat-note{margin:13px 0 0;font-size:.7rem;color:#9fa9bc}@media(max-width:800px){.ayat-footer{padding:22px 20px}.ayat-header{flex-wrap:wrap}.ayat-arabic{font-size:1.8rem}}
+    .adhan-controls{margin-top:18px;padding-top:16px;border-top:1px solid #a7f3d020}.adhan-buttons{display:flex;gap:8px;flex-wrap:wrap}.prayers .adhan-buttons button{margin-top:0}.prayers .adhan-status{margin:10px 0 0;font-size:.75rem;line-height:1.6;color:#b7d9d1}.prayers .adhan-help{font-size:.7rem;line-height:1.6;margin:8px 0 0;color:#94a3b8}#adhan-toggle[aria-pressed="true"]{background:#5eead41a;border-color:#5eead450;color:#a7f3d0}
+    .panel-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;text-align:left;border-radius:8px;min-height:32px}.panel-disclosure>summary::-webkit-details-marker{display:none}.panel-disclosure>summary:after{content:"";flex:0 0 8px;width:8px;height:8px;margin:0 4px 4px 0;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;opacity:.7}.panel-disclosure:not([open])>summary:after{transform:rotate(-45deg);margin-bottom:0}.panel-disclosure>summary:hover{color:#a7f3d0}.panel-disclosure>summary:focus-visible{outline:2px solid #a7f3d0;outline-offset:6px}.panel-disclosure>summary h1,.panel-disclosure>summary h2{margin:0}.timer-panel>summary h1{flex:1;text-align:center;padding-left:28px}.panel-content{padding-top:12px}.ayat-footer .panel-disclosure>summary{color:#f4dba2}.ayat-footer .panel-disclosure>summary h2{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}.ayat-actions{display:flex;justify-content:flex-end}.ayat-actions button{min-width:0;padding:9px 14px;font-size:.8rem;color:#f4dba2;border-color:#f5d99825;background:#f5d9980a}.dua-panel .panel-disclosure>summary{color:#e9ddfa}
   </style>
 </head>
 <body>
   <main>
-    <h1>Time It</h1>
+    <aside class="dua-panel" aria-labelledby="dua-heading">
+      <details class="panel-disclosure">
+      <summary><h2 id="dua-heading">Dua of the day</h2></summary>
+      <div class="panel-content">
+      <p class="dua-eyebrow">A moment of remembrance</p>
+      <p class="dua-date" id="dua-date"></p>
+      <h3 id="dua-title">For knowledge</h3>
+      <p class="dua-arabic" id="dua-arabic" lang="ar" dir="rtl">رَبِّ زِدْنِي عِلْمًا</p>
+      <p class="dua-label">Transliteration</p>
+      <p class="dua-transliteration" id="dua-transliteration">Rabbi zidni ilma.</p>
+      <p class="dua-label">Meaning</p>
+      <p class="dua-meaning" id="dua-meaning">My Lord, increase me in knowledge.</p>
+      <p class="dua-reference" id="dua-reference">Quran 20:114</p>
+      <div class="dua-footer">
+        <a id="dua-source" href="https://everydaydua.com/dua/quranic-rabbi-zidni-ilma" target="_blank" rel="noopener noreferrer">Read on Everyday Dua ↗</a>
+        <p>A daily rotation of five Quranic duas featured on Everyday Dua. Changes at London midnight.</p>
+      </div>
+      </div>
+      </details>
+    </aside>
+    <section aria-label="Timer">
+    <details class="panel-disclosure timer-panel" open>
+    <summary><h1>Time It</h1></summary>
+    <div class="panel-content">
+    <p class="tagline">Make space for focus. Stay connected to salah.</p>
     <div class="info"><div class="now"><span>Current time</span><time id="current-time"></time></div><div class="temperature"><span>Temperature</span><output id="temperature" aria-live="polite">Loading…</output></div></div>
     <div class="timer"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="track" cx="50" cy="50" r="45"/><circle id="progress" class="progress" cx="50" cy="50" r="45" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/></svg><div class="clock"><p id="display" aria-live="polite">05:00</p></div></div>
     <p id="status">Ready when you are</p>
     <div class="controls"><button class="primary" id="start" type="button">Start</button><button id="pause" type="button" disabled>Pause</button><button id="reset" type="button">Reset</button><button id="fullscreen" type="button" aria-pressed="false">Full screen</button></div>
     <div class="settings"><div class="set-time"><label for="minutes">Duration</label><input id="minutes" type="number" min="1" max="999" value="5" inputmode="numeric" aria-label="Timer duration in minutes"><span>min</span></div><div class="sound-toggle"><button id="sound" type="button" aria-pressed="true">🔊 Sound on</button></div></div>
+    </div>
+    </details>
+    </section>
+    <aside class="prayers" aria-labelledby="prayer-heading">
+      <details class="panel-disclosure">
+      <summary><h2 id="prayer-heading">London prayer times</h2></summary>
+      <div class="panel-content">
+      <p><a href="https://masjidabubakr.co.uk/" target="_blank" rel="noopener noreferrer">Masjid Abu Bakr, Walthamstow</a></p>
+      <p id="prayer-date"></p>
+      <div class="next-salah" id="next-salah">
+        <div class="next-heading"><span>Next salah</span><select id="salah-mode" aria-label="Count down to prayer start or congregation"><option value="begins">Begins</option><option value="iqamah">Iqamah</option></select></div>
+        <p class="next-name" id="next-name" aria-live="polite">Finding next salah…</p>
+        <output class="countdown" id="salah-countdown" role="timer" aria-live="off" aria-label="Time until next salah">--:--:--</output>
+        <p class="next-detail" id="next-detail">Using London local time</p>
+        <div class="countdown-track" aria-hidden="true"><span id="salah-progress"></span></div>
+      </div>
+      <table id="prayer-table" hidden aria-label="Today's prayer times in London local time">
+        <thead><tr><th scope="col">Prayer</th><th scope="col">Begins</th><th scope="col">Iqamah</th></tr></thead>
+        <tbody id="prayer-rows"></tbody>
+      </table>
+      <p id="prayer-message" class="prayer-note" role="status">Loading prayer times…</p>
+      <button id="prayer-retry" type="button" hidden>Retry</button>
+      <p class="prayer-note">London local time (GMT/BST). Iqamah is the congregation time.</p>
+      <div class="adhan-controls">
+        <div class="adhan-buttons"><button id="adhan-toggle" type="button" aria-pressed="false">Enable &amp; test adhan</button><button id="adhan-test" type="button" hidden>Test adhan</button><button id="adhan-stop" type="button" hidden>Stop audio</button></div>
+        <p id="adhan-status" class="adhan-status" role="status">Enable once per visit to allow automatic adhan.</p>
+        <p class="adhan-help">Plays at Begins for all five prayers, regardless of the countdown mode or timer sound setting. Keep this page open and your device awake.</p>
+        <p class="adhan-help">Mishary Rashid Alafasy · <a href="https://aladhan.com/download-adhans" target="_blank" rel="noopener noreferrer">Audio from AlAdhan</a></p>
+        <audio id="adhan-audio" src="https://cdn.aladhan.com/audio/adhans/a9.mp3" preload="none"></audio>
+      </div>
+      </div>
+      </details>
+    </aside>
+    <footer class="ayat-footer" aria-labelledby="ayat-heading">
+      <details class="panel-disclosure">
+      <summary><h2 id="ayat-heading">A moment with the Quran</h2></summary>
+      <div class="panel-content">
+      <div class="ayat-actions"><button id="another-ayat" type="button">Another ayat ↻</button></div>
+      <div aria-live="polite" aria-atomic="true">
+        <blockquote>
+          <p class="ayat-arabic" id="ayat-arabic" lang="ar" dir="rtl">إِنَّمَا قَوْلُنَا لِشَىْءٍ إِذَآ أَرَدْنَٰهُ أَن نَّقُولَ لَهُۥ كُن فَيَكُونُ</p>
+          <p class="ayat-translation" id="ayat-translation">When We intend for something to happen, We say to it, “Be,” and it becomes.</p>
+          <cite id="ayat-reference">An-Nahl · Quran 16:40</cite>
+        </blockquote>
+      </div>
+      <div class="ayat-links"><span>English translation: Talal Itani</span><a id="ayat-source" href="https://ayatalquran.com/random/verse/1941/en_itani" target="_blank" rel="noopener noreferrer">Read on Ayat Al Quran ↗</a></div>
+      <p class="ayat-note">Randomly chosen from four saved ayat. Select another whenever you’re ready.</p>
+      </div>
+      </details>
+    </footer>
   </main>
   <script>
     const display=document.querySelector('#display'),status=document.querySelector('#status'),progress=document.querySelector('#progress'),currentTime=document.querySelector('#current-time'),temperature=document.querySelector('#temperature'),favicon=document.querySelector('#favicon'),startButton=document.querySelector('#start'),pauseButton=document.querySelector('#pause'),resetButton=document.querySelector('#reset'),minutesInput=document.querySelector('#minutes'),soundButton=document.querySelector('#sound'),fullscreenButton=document.querySelector('#fullscreen');
     let duration=300,remaining=duration,deadline=null,timerId=null,soundOn=true,lastSecond=null,audioContext;
+    const prayerDate=document.querySelector('#prayer-date'),prayerTable=document.querySelector('#prayer-table'),prayerRows=document.querySelector('#prayer-rows'),prayerMessage=document.querySelector('#prayer-message'),prayerRetry=document.querySelector('#prayer-retry');
+    const londonDate=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'});
+    const prayerFields=[['Fajr','fajr_begins','fajr_jamah'],['Sunrise','sunrise',null],['Zuhr','zuhr_begins','zuhr_jamah'],['Asr','asr_mithl_2','asr_jamah'],['Maghrib','maghrib_begins','maghrib_jamah'],['Isha','isha_begins','isha_jamah']];
+    const nextSalah=document.querySelector('#next-salah'),nextName=document.querySelector('#next-name'),salahCountdown=document.querySelector('#salah-countdown'),nextDetail=document.querySelector('#next-detail'),salahProgress=document.querySelector('#salah-progress'),salahMode=document.querySelector('#salah-mode');
+    let prayerDays=[];
+    const londonParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+    // Resolve the UTC instant from London wall time, including the target day's DST offset.
+    function londonInstant(date,time){
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(time))return NaN;
+      const wall=Date.parse(`${date}T${time}Z`);let instant=wall;
+      for(let i=0;i<3;i++){const p=Object.fromEntries(londonParts.formatToParts(new Date(instant)).map(({type,value})=>[type,value]));const actual=Date.parse(`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}Z`);instant+=wall-actual}
+      return instant;
+    }
+    function findNextSalah(days,now,mode){
+      const events=days.flatMap(day=>prayerFields.filter(([, ,iqamah])=>iqamah).map(([name,begins,iqamah])=>({name,date:day.d_date,time:day[mode==='iqamah'?iqamah:begins],at:londonInstant(day.d_date,day[mode==='iqamah'?iqamah:begins])}))).filter(event=>Number.isFinite(event.at)).sort((a,b)=>a.at-b.at);
+      const index=events.findIndex(event=>event.at>now);
+      return index<0?null:{...events[index],previous:events[index-1]?.at};
+    }
+    function updateSalahCountdown(){
+      const now=Date.now(),today=londonDate.format(new Date(now)),next=findNextSalah(prayerDays.filter(day=>day.d_date>=today),now,salahMode.value);
+      for(const row of prayerRows.children)row.classList.toggle('up-next',Boolean(next&&next.date===prayerDay&&row.dataset.prayer===next.name));
+      nextSalah.classList.remove('soon');
+      if(!next){nextName.textContent=prayerLoading?'Finding next salah…':'Awaiting timetable';salahCountdown.textContent='--:--:--';nextDetail.textContent='A current timetable is needed for the countdown.';salahProgress.style.width='0%';return}
+      const seconds=Math.ceil((next.at-now)/1000),hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);
+      const name=`${next.name}${next.date!==today?' · Tomorrow':''}`;if(nextName.textContent!==name)nextName.textContent=name;
+      salahCountdown.textContent=[hours,minutes,seconds%60].map(value=>String(value).padStart(2,'0')).join(':');
+      nextDetail.textContent=`${salahMode.value==='iqamah'?'Iqamah':'Begins'} at ${next.time.slice(0,5)} · London`;
+      nextSalah.classList.toggle('soon',seconds<=900);
+      const span=next.at-(next.previous??next.at-86400000);salahProgress.style.width=`${Math.max(0,Math.min(100,100*(1-(next.at-now)/span)))}%`;
+    }
+    salahMode.addEventListener('change',updateSalahCountdown);setInterval(updateSalahCountdown,1000);
+    let prayerDay='',prayerLoading=false,lastPrayerAttempt=0;
+    function updatePrayerDate(){prayerDate.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',weekday:'short',day:'numeric',month:'long',year:'numeric'}).format(new Date());if(prayerDay!==londonDate.format(new Date()))prayerTable.hidden=true}
+    async function loadPrayerTimes(){
+      if(prayerLoading)return;
+      prayerLoading=true;lastPrayerAttempt=Date.now();prayerRetry.hidden=true;updatePrayerDate();
+      prayerMessage.textContent='Loading prayer times…';
+      const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+      try{
+        const response=await fetch('https://masjidabubakr.co.uk/wp-json/dpt/v1/prayertime?filter=today',{signal:controller.signal,cache:'no-store'});
+        if(!response.ok)throw new Error('Prayer request failed');
+        const data=await response.json(),today=londonDate.format(new Date()),day=Array.isArray(data)?data.find(item=>item.d_date===today):null;
+        if(!day)throw new Error('Current timetable unavailable');
+        const rows=prayerFields.map(([name,begins,iqamah])=>{
+          const row=document.createElement('tr'),heading=document.createElement('th');row.dataset.prayer=name;heading.scope='row';heading.textContent=name;row.append(heading);
+          for(const key of [begins,iqamah]){const cell=document.createElement('td');if(key){if(typeof day[key]!=='string'||!/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(day[key]))throw new Error('Invalid prayer time');cell.textContent=day[key].slice(0,5)}else cell.textContent='—';row.append(cell)}
+          return row;
+        });
+        prayerRows.replaceChildren(...rows);prayerDay=today;prayerDays=[day];if(day.tomorrow?.d_date)prayerDays.push(day.tomorrow);prayerTable.hidden=false;prayerMessage.textContent='Updated from the mosque’s live timetable.';
+      }catch{
+        prayerTable.hidden=prayerDay!==londonDate.format(new Date());
+        prayerMessage.textContent=prayerTable.hidden?'Prayer times unavailable. Open the mosque link above for its timetable.':'Could not refresh. Showing today’s last loaded times.';
+        prayerRetry.hidden=false;
+      }finally{clearTimeout(timeout);prayerLoading=false;updateSalahCountdown()}
+    }
+    prayerRetry.addEventListener('click',loadPrayerTimes);
+    function refreshPrayerTimes(){updatePrayerDate();if(Date.now()-lastPrayerAttempt>=(prayerTable.hidden?60000:600000))loadPrayerTimes()}
+    loadPrayerTimes();setInterval(refreshPrayerTimes,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshPrayerTimes()});
     const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
     function updateFavicon(){const text=remaining>=60?`${Math.ceil(remaining/60)}m`:`${remaining}s`,colour=remaining<=30?'#dc2626':remaining<=60?'#ef4444':'#7dd3fc',svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="${colour}"/><text x="32" y="39" text-anchor="middle" font-family="Arial,sans-serif" font-size="${text.length>2?'20':'25'}" font-weight="700" fill="#082031">${text}</text></svg>`;favicon.href=`data:image/svg+xml,${encodeURIComponent(svg)}`}
     function updateCurrentTime(){currentTime.dateTime=new Date().toISOString();currentTime.textContent=new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',second:'2-digit'}).format(new Date())}
@@ -38,6 +176,84 @@
     function start(){if(remaining===0)reset();deadline=Date.now()+remaining*1000;timerId=setInterval(tick,200);startButton.disabled=true;pauseButton.disabled=false;minutesInput.disabled=true;lastSecond=null;tick()}
     function reset(){stop();duration=Math.max(1,Math.min(999,Number(minutesInput.value)||5))*60;minutesInput.value=duration/60;remaining=duration;lastSecond=null;minutesInput.disabled=false;if('speechSynthesis'in window)speechSynthesis.cancel();paint()}
     startButton.addEventListener('click',start);pauseButton.addEventListener('click',()=>{stop();paint()});resetButton.addEventListener('click',reset);minutesInput.addEventListener('change',reset);soundButton.addEventListener('click',()=>{soundOn=!soundOn;soundButton.textContent=soundOn?'🔊 Sound on':'🔇 Sound off';soundButton.setAttribute('aria-pressed',soundOn);if(soundOn)tone([[660,0,.1]])});fullscreenButton.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{status.textContent='Full screen is unavailable'}});document.addEventListener('fullscreenchange',updateFullscreenButton);updateCurrentTime();setInterval(updateCurrentTime,1000);loadTemperature();updateFullscreenButton();paint();
+  </script>
+  <script>
+    // A local selection from Everyday Dua; independent of its homepage's daily selection.
+    const dailyDuas=[
+      {title:'For knowledge',arabic:'رَبِّ زِدْنِي عِلْمًا',transliteration:'Rabbi zidni ilma.',meaning:'My Lord, increase me in knowledge.',reference:'Quran 20:114',slug:'quranic-rabbi-zidni-ilma'},
+      {title:'The dua of Yunus',arabic:'لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ',transliteration:'La ilaha illa anta, subhanaka, inni kuntu minaz-zalimin.',meaning:'You alone are God. Glory belongs to You; I have indeed done wrong.',reference:'Quran 21:87',slug:'quranic-la-ilaha-illa-anta-subhanak'},
+      {title:'Trust in Allah',arabic:'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ',transliteration:"Hasbunallahu wa ni'mal-wakil.",meaning:'Allah is enough for us, and none is better to entrust our affairs to.',reference:'Quran 3:173',slug:'quranic-hasbunallah'},
+      {title:'For our parents',arabic:'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',transliteration:'Rabbir-hamhuma kama rabbayani saghira.',meaning:'My Lord, show them mercy, just as they nurtured me in childhood.',reference:'Quran 17:24',slug:'parents-rabbi-irhamhuma'},
+      {title:'Good in this life and the next',arabic:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',transliteration:"Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar.",meaning:'Our Lord, bless us with goodness here and in the life to come, and keep us safe from the torment of the Fire.',reference:'Quran 2:201',slug:'quranic-rabbana-atina'}
+    ];
+    const duaDayFormat=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'});
+    let displayedDuaDay='';
+    function selectDailyDua(now=new Date()){
+      const day=duaDayFormat.format(now),dayNumber=Math.floor(Date.parse(`${day}T00:00:00Z`)/86400000);
+      return {day,dua:dailyDuas[((dayNumber%dailyDuas.length)+dailyDuas.length)%dailyDuas.length]};
+    }
+    function updateDailyDua(){
+      const now=new Date(),{day,dua}=selectDailyDua(now);if(day===displayedDuaDay)return;
+      for(const field of ['title','arabic','transliteration','meaning','reference'])document.querySelector(`#dua-${field}`).textContent=dua[field];
+      document.querySelector('#dua-source').href=`https://everydaydua.com/dua/${dua.slug}`;
+      document.querySelector('#dua-date').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',weekday:'short',day:'numeric',month:'long'}).format(now);
+      displayedDuaDay=day;
+    }
+    updateDailyDua();setInterval(updateDailyDua,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateDailyDua()});
+  </script>
+  <script>
+    // Arabic and Talal Itani translations verified on Ayat Al Quran.
+    const quranAyat=[
+      {id:1941,reference:'An-Nahl · Quran 16:40',arabic:'إِنَّمَا قَوْلُنَا لِشَىْءٍ إِذَآ أَرَدْنَٰهُ أَن نَّقُولَ لَهُۥ كُن فَيَكُونُ',translation:'When We intend for something to happen, We say to it, “Be,” and it becomes.'},
+      {id:6095,reference:'Ash-Sharh · Quran 94:5',arabic:'فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا',translation:'With hardship comes ease.'},
+      {id:6097,reference:'Ash-Sharh · Quran 94:7',arabic:'فَإِذَا فَرَغْتَ فَٱنصَبْ',translation:'When your work is done, turn to devotion.'},
+      {id:6098,reference:'Ash-Sharh · Quran 94:8',arabic:'وَإِلَىٰ رَبِّكَ فَٱرْغَب',translation:'And to your Lord turn for everything.'}
+    ];
+    let currentAyatId=null;
+    function showRandomAyat(){
+      const choices=quranAyat.filter(ayat=>ayat.id!==currentAyatId),ayat=choices[Math.floor(Math.random()*choices.length)];
+      for(const field of ['arabic','translation','reference'])document.querySelector(`#ayat-${field}`).textContent=ayat[field];
+      document.querySelector('#ayat-source').href=`https://ayatalquran.com/random/verse/${ayat.id}/en_itani`;
+      currentAyatId=ayat.id;
+    }
+    document.querySelector('#another-ayat').addEventListener('click',showRandomAyat);showRandomAyat();
+  </script>
+  <script>
+    const adhanAudio=document.querySelector('#adhan-audio'),adhanToggle=document.querySelector('#adhan-toggle'),adhanTest=document.querySelector('#adhan-test'),adhanStop=document.querySelector('#adhan-stop'),adhanStatus=document.querySelector('#adhan-status');
+    let adhanEnabled=false,adhanEnabledAt=Infinity,adhanPlayback=0;
+    let playedAdhans=new Set();
+    try{const saved=JSON.parse(sessionStorage.getItem('timeit-played-adhans')||'[]');if(Array.isArray(saved))playedAdhans=new Set(saved.filter(key=>typeof key==='string').slice(-20))}catch{}
+    // Always use Begins. A brief grace period tolerates background timer throttling,
+    // but never replays hours-old prayers after a sleeping device wakes up.
+    function dueAdhans(days,now,enabledAt,played){
+      return days.flatMap(day=>prayerFields.filter(([, ,iqamah])=>iqamah).map(([name,begins])=>({name,key:`${day.d_date}:${name}`,at:londonInstant(day.d_date,day[begins])})))
+        .filter(event=>Number.isFinite(event.at)&&event.at>=enabledAt&&event.at<=now&&now-event.at<90000&&!played.has(event.key));
+    }
+    function updateAdhanControls(){adhanToggle.textContent=adhanEnabled?'Disable adhan':'Enable & test adhan';adhanToggle.setAttribute('aria-pressed',String(adhanEnabled));adhanTest.hidden=!adhanEnabled}
+    function stopAdhan(){adhanPlayback++;adhanAudio.pause();adhanAudio.currentTime=0;adhanStop.hidden=true;adhanStatus.textContent=adhanEnabled?'Adhan enabled — waiting for the next Begins time.':'Adhan disabled.'}
+    async function playAdhan(label){
+      const playback=++adhanPlayback;adhanAudio.pause();adhanAudio.currentTime=0;adhanAudio.volume=1;adhanStop.hidden=false;adhanStatus.textContent=`Loading ${label}…`;
+      try{await adhanAudio.play();if(playback===adhanPlayback)adhanStatus.textContent=`${label} playing.`}
+      catch{if(playback!==adhanPlayback)return;adhanEnabled=false;adhanAudio.pause();adhanStop.hidden=true;updateAdhanControls();adhanStatus.textContent='Audio could not play. Check your connection and select Enable & test adhan to try again.'}
+    }
+    adhanToggle.addEventListener('click',()=>{
+      if(adhanEnabled){adhanEnabled=false;stopAdhan();updateAdhanControls();return}
+      adhanEnabled=true;adhanEnabledAt=Date.now();updateAdhanControls();playAdhan('Test adhan');
+    });
+    adhanTest.addEventListener('click',()=>playAdhan('Test adhan'));
+    adhanStop.addEventListener('click',stopAdhan);
+    adhanAudio.addEventListener('ended',()=>{adhanStop.hidden=true;adhanStatus.textContent=adhanEnabled?'Adhan enabled — waiting for the next Begins time.':'Adhan disabled.'});
+    adhanAudio.addEventListener('error',()=>{if(!adhanEnabled)return;adhanEnabled=false;stopAdhan();updateAdhanControls();adhanStatus.textContent='Adhan audio unavailable. Check your connection and enable it again.'});
+    function checkAdhan(){
+      if(!adhanEnabled)return;
+      const due=dueAdhans(prayerDays,Date.now(),adhanEnabledAt,playedAdhans);
+      for(const event of due){
+        playedAdhans.add(event.key);
+        try{sessionStorage.setItem('timeit-played-adhans',JSON.stringify([...playedAdhans].slice(-20)))}catch{}
+        playAdhan(`${event.name} adhan`);
+      }
+    }
+    setInterval(checkAdhan,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkAdhan()});
   </script>
 </body>
 </html>
