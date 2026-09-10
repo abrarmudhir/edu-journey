@@ -14,6 +14,7 @@
     .ayat-footer{grid-column:1/-1;min-width:0;padding:26px 32px;border:1px solid #f5d99830;border-radius:26px;background:radial-gradient(ellipse at top right,#d6ad5512,transparent 65%),linear-gradient(120deg,#192338ed,#101a2ded);box-shadow:inset 0 1px #ffffff0d,0 20px 60px #0003;text-align:center}.ayat-header{display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left}.ayat-header h2{margin:0;color:#f4dba2;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}.ayat-header button{min-width:0;padding:9px 14px;font-size:.8rem;color:#f4dba2;border-color:#f5d99825;background:#f5d9980a}.ayat-footer blockquote{margin:20px auto;max-width:1000px}.ayat-arabic{font-family:"Traditional Arabic","Noto Naskh Arabic","Amiri",serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:400;line-height:2;overflow-wrap:anywhere;margin:0 0 12px;color:#fff8e8}.ayat-translation{max-width:760px;margin:0 auto;color:#d8dfe9;font-size:1rem;line-height:1.8}.ayat-footer cite{display:block;font-style:normal;font-size:.8rem;color:#e8cc92;margin-top:15px}.ayat-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;font-size:.76rem;color:#9fa9bc}.ayat-links a{color:#d9c393;text-underline-offset:4px}.ayat-footer .ayat-note{margin:13px 0 0;font-size:.7rem;color:#9fa9bc}@media(max-width:800px){.ayat-footer{padding:22px 20px}.ayat-header{flex-wrap:wrap}.ayat-arabic{font-size:1.8rem}}
     .adhan-controls{margin-top:18px;padding-top:16px;border-top:1px solid #a7f3d020}.adhan-buttons{display:flex;gap:8px;flex-wrap:wrap}.prayers .adhan-buttons button{margin-top:0}.prayers .adhan-status{margin:10px 0 0;font-size:.75rem;line-height:1.6;color:#b7d9d1}.prayers .adhan-help{font-size:.7rem;line-height:1.6;margin:8px 0 0;color:#94a3b8}#adhan-toggle[aria-pressed="true"]{background:#5eead41a;border-color:#5eead450;color:#a7f3d0}
     .panel-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;text-align:left;border-radius:8px;min-height:32px}.panel-disclosure>summary::-webkit-details-marker{display:none}.panel-disclosure>summary:after{content:"";flex:0 0 8px;width:8px;height:8px;margin:0 4px 4px 0;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;opacity:.7}.panel-disclosure:not([open])>summary:after{transform:rotate(-45deg);margin-bottom:0}.panel-disclosure>summary:hover{color:#a7f3d0}.panel-disclosure>summary:focus-visible{outline:2px solid #a7f3d0;outline-offset:6px}.panel-disclosure>summary h1,.panel-disclosure>summary h2{margin:0}.timer-panel>summary h1{flex:1;text-align:center;padding-left:28px}.panel-content{padding-top:12px}.ayat-footer .panel-disclosure>summary{color:#f4dba2}.ayat-footer .panel-disclosure>summary h2{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}.ayat-actions{display:flex;justify-content:flex-end}.ayat-actions button{min-width:0;padding:9px 14px;font-size:.8rem;color:#f4dba2;border-color:#f5d99825;background:#f5d9980a}.dua-panel .panel-disclosure>summary{color:#e9ddfa}
+    .prayers.salah-alert{border-color:#fbbf24;background:linear-gradient(145deg,#49391f,#151d30);animation:salah-flash 2s ease-in-out infinite}.salah-alert-label{display:block;margin-top:7px;font-size:.74rem;font-weight:600;letter-spacing:0;color:#fde68a}.salah-alert-label[hidden]{display:none}@keyframes salah-flash{0%,100%{box-shadow:0 0 0 1px #fbbf2420,0 0 12px #fbbf2410}50%{box-shadow:0 0 0 3px #fbbf2490,0 0 38px #fbbf2460}}@media(prefers-reduced-motion:reduce){.prayers.salah-alert{animation:none;box-shadow:0 0 0 2px #fbbf2460}}
   </style>
 </head>
 <body>
@@ -53,7 +54,7 @@
     </section>
     <aside class="prayers" aria-labelledby="prayer-heading">
       <details class="panel-disclosure">
-      <summary><h2 id="prayer-heading">London prayer times</h2></summary>
+      <summary><h2 id="prayer-heading">London prayer times<small id="salah-alert-label" class="salah-alert-label" hidden></small></h2></summary>
       <div class="panel-content">
       <p><a href="https://masjidabubakr.co.uk/" target="_blank" rel="noopener noreferrer">Masjid Abu Bakr, Walthamstow</a></p>
       <p id="prayer-date"></p>
@@ -122,6 +123,10 @@
     }
     function updateSalahCountdown(){
       const now=Date.now(),today=londonDate.format(new Date(now)),next=findNextSalah(prayerDays.filter(day=>day.d_date>=today),now,salahMode.value);
+      const begins=findNextSalah(prayerDays,now,'begins'),alerting=Boolean(begins&&begins.at-now<=15*60*1000),alertLabel=document.querySelector('#salah-alert-label');
+      document.querySelector('.prayers').classList.toggle('salah-alert',alerting);
+      alertLabel.hidden=!alerting;
+      alertLabel.textContent=alerting?`${begins.name} begins in ${Math.ceil((begins.at-now)/60000)} min`:'';
       for(const row of prayerRows.children)row.classList.toggle('up-next',Boolean(next&&next.date===prayerDay&&row.dataset.prayer===next.name));
       nextSalah.classList.remove('soon');
       if(!next){nextName.textContent=prayerLoading?'Finding next salah…':'Awaiting timetable';salahCountdown.textContent='--:--:--';nextDetail.textContent='A current timetable is needed for the countdown.';salahProgress.style.width='0%';return}
