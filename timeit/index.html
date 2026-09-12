@@ -16,6 +16,8 @@
     .panel-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;text-align:left;border-radius:8px;min-height:32px}.panel-disclosure>summary::-webkit-details-marker{display:none}.panel-disclosure>summary:after{content:"";flex:0 0 8px;width:8px;height:8px;margin:0 4px 4px 0;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;opacity:.7}.panel-disclosure:not([open])>summary:after{transform:rotate(-45deg);margin-bottom:0}.panel-disclosure>summary:hover{color:#a7f3d0}.panel-disclosure>summary:focus-visible{outline:2px solid #a7f3d0;outline-offset:6px}.panel-disclosure>summary h1,.panel-disclosure>summary h2{margin:0}.timer-panel>summary h1{flex:1;text-align:center;padding-left:28px}.panel-content{padding-top:12px}.ayat-footer .panel-disclosure>summary{color:#f4dba2}.ayat-footer .panel-disclosure>summary h2{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}.ayat-actions{display:flex;justify-content:flex-end}.ayat-actions button{min-width:0;padding:9px 14px;font-size:.8rem;color:#f4dba2;border-color:#f5d99825;background:#f5d9980a}.dua-panel .panel-disclosure>summary{color:#e9ddfa}
     .prayers.salah-alert{border-color:#fbbf24;background:linear-gradient(145deg,#49391f,#151d30);animation:salah-flash 2s ease-in-out infinite}.salah-alert-label{display:block;margin-top:7px;font-size:.74rem;font-weight:600;letter-spacing:0;color:#fde68a}.salah-alert-label[hidden]{display:none}@keyframes salah-flash{0%,100%{box-shadow:0 0 0 1px #fbbf2420,0 0 12px #fbbf2410}50%{box-shadow:0 0 0 3px #fbbf2490,0 0 38px #fbbf2460}}@media(prefers-reduced-motion:reduce){.prayers.salah-alert{animation:none;box-shadow:0 0 0 2px #fbbf2460}}
     .quran-player{margin:24px 0 0;padding:20px;border:1px solid #5eead430;border-radius:20px;background:#0b202b80;text-align:left}.quran-player h3{margin:0 0 14px;color:#d1fae5}.quran-player select{display:block;width:100%;margin:8px 0 14px;padding:10px;border:1px solid #9be6da30;border-radius:10px;background:#112d39;color:#d1fae5;font:inherit}.quran-player audio{width:100%;margin:14px 0}.quran-player .continuous{display:flex;align-items:center;gap:10px}.quran-player input{width:18px;height:18px;accent-color:#5eead4}.quran-player p{font-size:.8rem;color:#94bdb9}.quran-player a{color:#a5ddd3}
+
+    .quran-player{margin:18px 0 0;border-color:#f5d99825;background:#0d172980}.quran-toolbar{display:grid;grid-template-columns:minmax(0,2fr) minmax(120px,1fr);gap:18px}.quran-options,.quran-navigation{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}.quran-player [hidden]{display:none}.quran-navigation button{min-width:0;font-size:.85rem}.quran-ayahs{position:relative;list-style:none;padding:8px;margin:20px 0;max-height:480px;overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#a99466 #101a2d;border:1px solid #f5d99820;border-radius:16px}.quran-ayahs:empty{display:none}.quran-ayahs li{border-bottom:1px solid #ffffff0c;border-inline-start:3px solid transparent;border-radius:12px;transition:background .25s,border-color .25s}.quran-ayahs li.active{background:#f5d99812;border-inline-start-color:#f4dba2}.quran-verse{display:grid;width:100%;grid-template-columns:32px minmax(0,1fr);gap:12px;padding:22px 18px;text-align:left;background:transparent;box-shadow:none;border:0;font-weight:400;min-width:0}.quran-verse:hover:not(:disabled){transform:none;box-shadow:none;background:#ffffff05}.quran-verse-number{font:600 .75rem/28px system-ui;color:#f4dba2;border:1px solid #f5d99830;border-radius:50%;width:28px;height:28px;text-align:center;align-self:start}.quran-arabic{display:block;color:#fff8e8;font:400 clamp(1.7rem,3vw,2.2rem)/2.1 "Traditional Arabic","Noto Naskh Arabic","Amiri",serif;text-align:right;overflow-wrap:anywhere}.quran-translation{grid-column:2;color:#cbd5e1;line-height:1.8;font-size:1rem}.quran-verse:focus-visible{outline-offset:-3px}.quran-ayahs:focus-visible{outline:2px solid #f4dba2;outline-offset:3px}.quran-player .quran-credit{margin-bottom:0}@media(max-width:600px){.quran-player{padding:14px}.quran-toolbar{grid-template-columns:1fr;gap:0}.quran-verse{padding:16px 8px;gap:8px;grid-template-columns:28px minmax(0,1fr)}.quran-translation{grid-column:1/-1}.quran-ayahs{max-height:420px;padding:4px}}
   </style>
 </head>
 <body>
@@ -84,30 +86,28 @@
       </details>
     </aside>
     <footer class="ayat-footer" aria-labelledby="ayat-heading">
-      <section class="quran-player" aria-labelledby="quran-player-heading">
-        <h3 id="quran-player-heading">Listen to the Quran</h3>
-        <label for="quran-surah">Choose a surah</label>
-        <select id="quran-surah"></select>
-        <label class="continuous"><input id="quran-continuous" type="checkbox" checked>Play continuously</label>
-        <p>Continue to the next surah, then restart at Al-Fatihah after An-Nas.</p>
-        <audio id="quran-audio" controls preload="none" aria-label="Quran recitation"></audio>
-        <p id="quran-status" role="status">Choose a surah and press play.</p>
-        <p>Mishary Rashid Alafasy · <a href="https://alquran.cloud/cdn" target="_blank" rel="noopener noreferrer">Audio from Al Quran Cloud</a></p>
-      </section>
-      <details class="panel-disclosure">
+      <details class="panel-disclosure" open>
       <summary><h2 id="ayat-heading">A moment with the Quran</h2></summary>
-      <div class="panel-content">
-      <div class="ayat-actions"><button id="another-ayat" type="button">Another ayat ↻</button></div>
-      <div aria-live="polite" aria-atomic="true">
-        <blockquote>
-          <p class="ayat-arabic" id="ayat-arabic" lang="ar" dir="rtl">إِنَّمَا قَوْلُنَا لِشَىْءٍ إِذَآ أَرَدْنَٰهُ أَن نَّقُولَ لَهُۥ كُن فَيَكُونُ</p>
-          <p class="ayat-translation" id="ayat-translation">When We intend for something to happen, We say to it, “Be,” and it becomes.</p>
-          <cite id="ayat-reference">An-Nahl · Quran 16:40</cite>
-        </blockquote>
-      </div>
-      <div class="ayat-links"><span>English translation: Talal Itani</span><a id="ayat-source" href="https://ayatalquran.com/random/verse/1941/en_itani" target="_blank" rel="noopener noreferrer">Read on Ayat Al Quran ↗</a></div>
-      <p class="ayat-note">Randomly chosen from four saved ayat. Select another whenever you’re ready.</p>
-      </div>
+      <section class="quran-player" aria-label="Quran reader and recitation">
+        <div class="quran-toolbar">
+          <div><label for="quran-surah">Choose a surah</label><select id="quran-surah"></select></div>
+          <div><label for="quran-ayah">Go to ayah</label><select id="quran-ayah" disabled></select></div>
+        </div>
+        <div class="quran-options">
+          <label class="continuous"><input id="quran-follow" type="checkbox" checked>Follow recitation</label>
+          <label class="continuous"><input id="quran-continuous" type="checkbox" checked>Continue to next surah</label>
+        </div>
+        <audio id="quran-audio" controls preload="none" aria-label="Current ayah recitation"></audio>
+        <div class="quran-navigation">
+          <button id="quran-previous" type="button" disabled>Previous ayah</button>
+          <button id="quran-next" type="button" disabled>Next ayah</button>
+          <button id="quran-retry" type="button" hidden>Retry</button>
+        </div>
+        <p id="quran-status" role="status">Loading surah…</p>
+        <p>Tap an ayah to play from there. The highlighted ayah follows the recitation.</p>
+        <ol id="quran-ayahs" class="quran-ayahs" aria-label="Surah ayahs" tabindex="0"></ol>
+        <p class="quran-credit">Mishary Rashid Alafasy · English translation: Talal Itani · <a href="https://alquran.cloud/cdn" target="_blank" rel="noopener noreferrer">Al Quran Cloud</a></p>
+      </section>
       </details>
     </footer>
   </main>
@@ -217,51 +217,10 @@
     }
     updateDailyDua();setInterval(updateDailyDua,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateDailyDua()});
   </script>
-  <script>
-    // Arabic and Talal Itani translations verified on Ayat Al Quran.
-    const quranAyat=[
-      {id:1941,reference:'An-Nahl · Quran 16:40',arabic:'إِنَّمَا قَوْلُنَا لِشَىْءٍ إِذَآ أَرَدْنَٰهُ أَن نَّقُولَ لَهُۥ كُن فَيَكُونُ',translation:'When We intend for something to happen, We say to it, “Be,” and it becomes.'},
-      {id:6095,reference:'Ash-Sharh · Quran 94:5',arabic:'فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا',translation:'With hardship comes ease.'},
-      {id:6097,reference:'Ash-Sharh · Quran 94:7',arabic:'فَإِذَا فَرَغْتَ فَٱنصَبْ',translation:'When your work is done, turn to devotion.'},
-      {id:6098,reference:'Ash-Sharh · Quran 94:8',arabic:'وَإِلَىٰ رَبِّكَ فَٱرْغَب',translation:'And to your Lord turn for everything.'}
-    ];
-    let currentAyatId=null;
-    function showRandomAyat(){
-      const choices=quranAyat.filter(ayat=>ayat.id!==currentAyatId),ayat=choices[Math.floor(Math.random()*choices.length)];
-      for(const field of ['arabic','translation','reference'])document.querySelector(`#ayat-${field}`).textContent=ayat[field];
-      document.querySelector('#ayat-source').href=`https://ayatalquran.com/random/verse/${ayat.id}/en_itani`;
-      currentAyatId=ayat.id;
-    }
-    document.querySelector('#another-ayat').addEventListener('click',showRandomAyat);showRandomAyat();
-  </script>
   <script id="quran-player-script">
     const surahNames="Al-Fatihah|Al-Baqarah|Ali 'Imran|An-Nisa|Al-Ma'idah|Al-An'am|Al-A'raf|Al-Anfal|At-Tawbah|Yunus|Hud|Yusuf|Ar-Ra'd|Ibrahim|Al-Hijr|An-Nahl|Al-Isra|Al-Kahf|Maryam|Ta-Ha|Al-Anbiya|Al-Hajj|Al-Mu'minun|An-Nur|Al-Furqan|Ash-Shu'ara|An-Naml|Al-Qasas|Al-'Ankabut|Ar-Rum|Luqman|As-Sajdah|Al-Ahzab|Saba|Fatir|Ya-Sin|As-Saffat|Sad|Az-Zumar|Ghafir|Fussilat|Ash-Shura|Az-Zukhruf|Ad-Dukhan|Al-Jathiyah|Al-Ahqaf|Muhammad|Al-Fath|Al-Hujurat|Qaf|Adh-Dhariyat|At-Tur|An-Najm|Al-Qamar|Ar-Rahman|Al-Waqi'ah|Al-Hadid|Al-Mujadilah|Al-Hashr|Al-Mumtahanah|As-Saff|Al-Jumu'ah|Al-Munafiqun|At-Taghabun|At-Talaq|At-Tahrim|Al-Mulk|Al-Qalam|Al-Haqqah|Al-Ma'arij|Nuh|Al-Jinn|Al-Muzzammil|Al-Muddaththir|Al-Qiyamah|Al-Insan|Al-Mursalat|An-Naba|An-Nazi'at|'Abasa|At-Takwir|Al-Infitar|Al-Mutaffifin|Al-Inshiqaq|Al-Buruj|At-Tariq|Al-A'la|Al-Ghashiyah|Al-Fajr|Al-Balad|Ash-Shams|Al-Layl|Ad-Duha|Ash-Sharh|At-Tin|Al-'Alaq|Al-Qadr|Al-Bayyinah|Az-Zalzalah|Al-'Adiyat|Al-Qari'ah|At-Takathur|Al-'Asr|Al-Humazah|Al-Fil|Quraysh|Al-Ma'un|Al-Kawthar|Al-Kafirun|An-Nasr|Al-Masad|Al-Ikhlas|Al-Falaq|An-Nas".split('|');
-    const quranAudio=document.querySelector('#quran-audio'),quranSurah=document.querySelector('#quran-surah'),quranContinuous=document.querySelector('#quran-continuous'),quranStatus=document.querySelector('#quran-status');
-    let quranPlayback=0;
-    surahNames.forEach((name,index)=>{const option=document.createElement('option');option.value=String(index+1);option.textContent=`${index+1}. ${name}`;quranSurah.append(option)});
-    function selectQuranSurah(autoplay=false){
-      const playback=++quranPlayback;
-      quranAudio.pause();
-      quranAudio.src=`https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${quranSurah.value}.mp3`;
-      quranStatus.textContent=`${surahNames[Number(quranSurah.value)-1]} — press play to listen.`;
-      if(autoplay){
-        quranStatus.textContent='Loading recitation…';
-        quranAudio.play().catch(()=>{if(playback===quranPlayback)quranStatus.textContent='Unable to play. Check your connection and press play to retry.'});
-      }
-    }
-    quranSurah.addEventListener('change',()=>selectQuranSurah(!quranAudio.paused));
-    quranAudio.addEventListener('playing',()=>{quranStatus.textContent=`Playing ${surahNames[Number(quranSurah.value)-1]}.`});
-    quranAudio.addEventListener('pause',()=>{if(!quranAudio.ended)quranStatus.textContent='Paused. Press play to continue.'});
-    quranAudio.addEventListener('waiting',()=>{quranStatus.textContent='Loading recitation…'});
-    quranAudio.addEventListener('error',()=>{quranStatus.textContent='Recitation unavailable. Check your connection and press play to retry.'});
-    quranAudio.addEventListener('ended',()=>{
-      if(!quranContinuous.checked){quranStatus.textContent='Surah finished. Choose a surah or press play to listen again.';return}
-      quranSurah.value=String(Number(quranSurah.value)%surahNames.length+1);selectQuranSurah(true);
-    });
-    // Leave recitation paused when adhan starts so the two recordings do not overlap.
-    document.querySelector('#adhan-audio').addEventListener('play',()=>{quranPlayback++;quranAudio.pause()});
-    selectQuranSurah();
   </script>
+  <script src="quran.js"></script>
   <script>
     const adhanAudio=document.querySelector('#adhan-audio'),adhanToggle=document.querySelector('#adhan-toggle'),adhanTest=document.querySelector('#adhan-test'),adhanStop=document.querySelector('#adhan-stop'),adhanStatus=document.querySelector('#adhan-status');
     let adhanEnabled=false,adhanEnabledAt=Infinity,adhanPlayback=0;
