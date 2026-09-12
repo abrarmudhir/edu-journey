@@ -1,2 +1,4 @@
 .idea
 /assets/deen/madrasa/*.pptx
+/assets/deen/madrasa/lessons/*.pptx
+/outputs/
