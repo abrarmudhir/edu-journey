@@ -2,3 +2,6 @@
 /assets/deen/madrasa/*.pptx
 /assets/deen/madrasa/lessons/*.pptx
 /outputs/
+.tmp
+/assets/deen/madrasa/_lessons_/
+/assets/deen/madrasa/~$class_manager.xlsx
